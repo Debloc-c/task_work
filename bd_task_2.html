@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+<div id='choise'>
+	<p>Пункт 1. Выберите список всех овощей и фруктов которые есть и в t1 и в t2. &nbsp;<input type="button" value="ПОЛУЧИТЬ" id="get_same"></p>
+	<p>Пункт 2. Выберите список всех овощей и фруктов из t1, которых нет в t2, а из t2, которых нет в t1. &nbsp;<input type="button" value="ПОЛУЧИТЬ" id="get_different"></p>
+</div>
+<div id='result'>
+</div>
+</body>
+<script>
+	$('#get_same').click(function(event)
+	{
+		var element_result=$('#result');
+		element_result.empty();
+	
+
+		$.post("case.php",{info:"same"},function(dt)
+		{
+			var new_element='name <br> ------ <br>';
+
+			for(var key in dt)
+			{
+				new_element+=dt[key] + '<br>';
+			}	
+		
+			element_result.append(new_element);
+
+		},"json");
+	});
+
+	$('#get_different').click(function(event)
+	{
+		var element_result=$('#result');
+		element_result.empty();
+
+		$.post("case.php",{info:"different"},function(dt)
+		{
+			var new_element='name <br> ------ <br>';
+
+			for(var key in dt)
+			{
+				new_element+=dt[key] + '<br>';
+			}	
+		
+			element_result.append(new_element);
+
+		},"json");
+	});
+</script>
+</html>
